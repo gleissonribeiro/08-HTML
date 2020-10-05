@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Exercícios HTML</title>
+</head>
+<body>
+   <!-- HEADER -->
+   <header>Exercícios HTML</header>
+
+   <!-- NAVEGAÇÃO -->
+   <nav>
+      <a href="./99_exercicios/teste.html">00-Teste01</a>
+      <a href="./99_exercicios/temp.html">Temporário</a>
+      <a href="">Terceiro link</a>
+   </nav>
+
+   <!-- SEÇÃO -->
+   <section id="conteudo">
+
+   </section>
+
+   <!-- FOOTER -->
+   <footer>
+      <br>Curso de web moderno
+   </footer>
+
+   <!-- SCRIPT -->
+   <script>
+      // Toma todos os links -tags 'a'- e os escreve no console
+      document.querySelectorAll('a').forEach(link => console.log(link))
+      
+      // Conteúdo na seção com 'id = conteudo'
+      const conteudo = document.getElementById('conteudo')
+
+      // Associa uma função ao envento 'onclick' de cada link
+      document.querySelectorAll('a').forEach(link => {
+         link.onclick = (e) => {
+            e.preventDefault()//Desativa o comportamento padrão do evento - não irá navegar.
+            // console.log('Ação!!')
+            fetch(link.href) //'fetch' retorna uma promise. Aqui irá retornar o arquivo HTML
+               .then(resp => resp.text()) // 'resp.text' retorna o texto do HTML
+               .then(htmlText => conteudo.innerHTML = htmlText)
+         }
+      })
+   </script>
+</body>
+</html>
