@@ -1,0 +1,82 @@
+<h1>Formulário</h1>
+
+<!-- <form action="http://localhost:3003/usuarios" method="POST"> -->
+<form>
+
+   <!-- Entrada de texto -->
+   <input type="text" name="username">
+
+   <!-- Entrada de senha -->  
+   <input type="password" name="senha">
+
+   <!-- Entrada para grandes textos -->
+   <textarea name="bio" id="" cols="30" rows="10">Biografia</textarea>
+
+   <!-- Entrada com 'radio buttons' -->
+   <div>
+      <input type="radio" name="userType" value="admin"> Admin
+      <input type="radio" name="userType" value ="regular"> Regular
+      <input type="radio" name="userType" value ="teacher"> Porfessor
+
+   </div>
+
+   <!-- Entrada com 'checkboxs' -->
+   <div>
+      <input type="checkbox" name="ativo">Ativo
+   </div>
+
+   <!-- Entrada com 'Combobox' -->
+   <select name="estado">
+      <option>Selecione</option>
+      <option value="ac">Acre</option>
+      <option value="ba">Bahia</option>
+      <option value="ce">Ceará</option>
+   </select>
+
+   <!-- Entrada com múltiplas seleções -->
+   <select name="interesses" multiple size="5">
+      <option value="js">JavaScript</option>
+      <option value="java">Java</option>
+      <option value="php">PHP</option>
+      <option value="python">Python</option>
+      <option value="go">Go</option>
+      <option value="c">C</option>
+   </select>
+
+   <!-- Botões de submissão -->
+   <button formaction="http://localhost:3003/usuarios" formmethod="POST">Incluir</button>
+   <!-- <button>Incluir</button> -->
+
+   <button formaction="http://localhost:3003/usuarios/321" formmethod="POST">Alterar</button>
+</form>
+
+<!-- ------- -->
+<!-- ESTILOS -->
+<!-- ------- -->
+
+<style>
+   input, select, textarea
+   {
+      display: block;
+      margin-bottom: 10px;
+   }
+
+   /* Especificamente para os 'inputs' do tipo 'radio' */
+   input[type=radio], input[type=checkbox]
+   {
+      display: inline;
+   }
+</style>
+
+<script>
+   const btns = document.querySelectorAll('button')
+
+   btns.forEach( btn => {
+
+      btn.onclick = e => {
+         e.preventDefault()
+         console.log('Funcionou!!')
+      }
+   })
+
+</script>

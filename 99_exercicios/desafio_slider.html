@@ -1,0 +1,138 @@
+<h1>Imagens</h1>
+
+<!-- JPG -->
+<div wm-slider>  
+   <p>
+      <img src="http://files.cod3r.com.br/curso-web/imagem1.jpg"
+      alt="Muro da cidade" width="513" height="342"
+      title="Muro da cidade por Tarso Bessa">
+      
+   </p>
+   
+   <!-- GIF -->
+   <p>    
+      <img src="http://files.cod3r.com.br/curso-web/imagem2.gif"
+      alt="Intro Cod3r" height="342">
+   </p>
+   
+   <!-- PNG - permite transparência em parte da imagem -->
+   <p class="circular">
+      <img src="http://files.cod3r.com.br/curso-web/imagem3.png"
+      alt="Rio de Janeiro" width = "513" height="342">
+   </p>
+   
+   <!-- Imagem com texto -->
+   
+   <p class="texto">
+      <img src="http://files.cod3r.com.br/curso-web/avatar.jpg" 
+      alt="Avatar" height="50" align="left">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione sequi commodi maxime repellendus quo unde odio voluptatem earum similique error. Ex perferendis, modi odio quibusdam cumque iste ut eveniet fuga?
+   </p>
+   
+   
+   <!-- Imagem a partir do CSS -->
+   <p class="cidade"></p>
+   
+   
+   <!-- Imagem usando 'picture' -->
+   <p>
+      <picture>
+         <source srcset="http://files.cod3r.com.br/curso-web/logo-larga.png"
+         media="(min-width: 600px)">
+         
+         <img src="http://files.cod3r.com.br/curso-web/logo-estreita.png" 
+         alt="Logo">
+         
+      </picture>
+   </p>
+</div>
+   
+   <!-- ------- -->
+   <!-- ESTILOS -->
+   <!-- ------- -->
+
+<style>
+   p {
+      display: none;
+      position: absolute;
+   }
+
+
+   .cidade {
+      background-image: url('http://files.cod3r.com.br/curso-web/imagem4.jpg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 200%;
+      height: 342px;
+      width: 513px;
+   }
+
+
+   .circular {
+      background-color: #444;
+      width: 513px;
+   }
+
+   .texto {
+      width: 400px;
+   }
+
+   .texto img {
+      margin: 0px 12px 2px 0px;
+   }
+
+</style>
+
+
+<script>
+
+   // ---- Move um elemento na tela----
+   function mover(el, inicio, fim, passo, callback) {
+      inicio -= passo
+      if (fim < inicio) {
+         el.style.left = inicio + 'px'
+         setTimeout(() => mover(el, inicio, fim, passo, callback) , 10);
+      } else {
+         callback()
+      }
+   }
+   // ----------------------------------
+
+   // ====Exibe os slides na tela ====
+   function exibirSlide(slides, currSlide) {
+      currSlide.style.display = 'block'
+
+      // Larguras da janela do browser e do slide atual
+      const [inicio, fim] = [innerWidth, -currSlide.clientWidth]
+
+      // Posição inicial do slide
+      currSlide.style.left = `${inicio}px`
+
+      // Move o slide na tela
+      mover(currSlide, inicio, fim, 5, () => {
+         currSlide.style.display = 'none'
+         exibirSlide(slides, nextSlide(slides, currSlide))
+      })
+   }
+   // ================================
+
+   // ----Encontra o próximo slide a ser exibido----
+   function nextSlide(slides, slide) {
+      const nextIndex = slides.indexOf(slide) + 1 // Next index
+      return nextIndex < slides.length ? slides[nextIndex] : slides[0]
+   }
+   // ----------------------------------------------
+
+   // ****Slider****
+   function slider() {  
+      const elementos = document.querySelectorAll('[wm-slider] > p')// NodeList
+      const slides = Array.from(elementos)//Array
+      exibirSlide(slides, slides[0])
+   }
+   // **************
+
+
+   slider()
+
+
+</script>

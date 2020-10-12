@@ -1,0 +1,83 @@
+<h1>Vídeo</h1>
+
+<video id="meuVideo" height="300" width="550" controls autoplay controlsList="nodownload">
+   <!-- Várias fontes de vídeo. O primeiro encontrado será exibido -->
+   <source src="http://files.cod3r.com.br/curso-web/video.mp4" type="video/mp4">
+   
+   <!-- Caso não encontre nenhum vídeo -->
+   <h2>Seu browser não suporta a tag de vídeo</h2>
+</video>
+
+<!-- Moldura da barra de progresso -->
+<div wm-progresso="meuVideo" class="progresso">
+   
+   <!-- Porgresso -->
+   <div></div>
+
+</div>
+
+<!-- Botões 'play' e 'pause' -->
+<div>
+   <button wm-play="meuVideo">Play</button>
+   <button wm-pause="meuVideo">Pause</button>
+</div>
+
+
+<!-- ------- -->
+<!-- ESTILOS -->
+<!-- ------- -->
+
+<style>
+   /* Moldura da barra de progresso */
+   .progresso {
+      border: solid 1px #444;
+      height: 20px;
+      margin: 20px;
+      width: 500px;
+   }
+
+   /* 'div' dentro do elemento cuja classe é 'progresso' */
+   .progresso > div {
+      background-color: red;
+      color: white;
+      height: 100%;
+      text-align: right;
+      font-size: 14px;
+      width: 34%;
+   }
+</style>
+
+
+<!-- ---------- -->
+<!-- JAVASCRIPT -->
+<!-- ---------- -->
+
+<script>
+
+   // Configura o vídeo com parâmetro 'id' igual a 'id'
+   function configurarVideo(id) {
+      // Toma o vídeo
+      const video = document.querySelector(`#${id}`)
+
+      // Desabilita a possibilidade de donwload a partir do menu contextual
+      video.oncontextmenu = () => false
+
+      // Botões 'Play' e 'Pause'
+      console.log(document.querySelector(`[wm-play=${id}]`))
+      document.querySelector(`[wm-play=${id}]`).onclick = () => video.play()
+      document.querySelector(`[wm-pause=${id}]`).onclick = () => video.pause()
+
+      // Atualização do percentual do vídeo
+      setInterval(() => {
+         const percentual = (video.currentTime / video.duration) * 100
+         const divProg = document.querySelector(`[wm-progresso=${id}] > div`)
+         
+         divProg.innerHTML = `${percentual.toFixed(0)}%`
+         divProg.style.width = `${percentual}%`
+      }, 100);
+   }
+
+   configurarVideo('meuVideo')
+
+
+</script>
